@@ -73,3 +73,4 @@ $icon->setAlt('This alternative text will be displayed when the icon is not avai
 $alt = $icon->getAlt();
 ```
 Result:
+!(Sample output)[https://raw.githubusercontent.com/Yoshi2889/smf-ui/master/sample_result.png]
