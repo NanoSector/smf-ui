@@ -32,7 +32,7 @@ class RoundframeWidget extends \SMFUI\Widgets\GenericTemplateWidget
 	{
 		return '
 		<span class="upperframe"><span></span></span>
-		<div class="roundframe %add_classes%">%beforeContent%%contents%%afterContent%</div>
+		<div class="roundframe %add_classes%" %id%>%contents%</div>
 		<span class="lowerframe"><span></span></span>';
 	}
 }

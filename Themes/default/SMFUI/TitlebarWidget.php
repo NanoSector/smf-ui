@@ -31,7 +31,7 @@ class TitlebarWidget extends \SMFUI\Widgets\GenericTemplateWidget
 	public function getHTML()
 	{
 		return '
-		<div class="title_bar %add_classes%">
+		<div class="title_bar %add_classes%" %id%>
 			<h3 class="titlebg">%contents%</h3>
 		</div>';
 	}

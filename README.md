@@ -24,10 +24,14 @@ use SMFUI\Widgets;
  */
 
 // Create a new Catbar with the text "A new catbar!" in its header. It can be directly echo'ed to the page.
-echo new Catbar('A new catbar!');
+$catbar = new Widgets\Catbar();
+$catbar->insertChild(new Widgets\TextWidget('A new catbar!'));
+echo $catbar;
 
 // Create a new Titlebar with the text "Testing!" in its header and also directly echo it.
-echo new Titlebar('Testing!');
+$titlebar = new Widgets\Titlebar();
+$titlebar->insertChild(new Widgets\TextWidget('Testing!'));
+echo $titlebar;
 
 /*
  * Nested widgets
@@ -35,15 +39,19 @@ echo new Titlebar('Testing!');
 
 // Create a Catbar...
 // The catbar will contain the icon.
-$catbar = new Catbar($iconHTML . 'A catbar!');
+$catbar = new Widgets\Catbar();
+$catbarText = new Widgets\TextWidget('A catbar!');
+$catbar->insertChild($catbarText);
 
 // We would like an icon, before the content.
-$icon = new Icon('help');
-$catbar->insertBeforeContent($icon);
+$icon = new Widgets\Icon('help');
+$catbar->insertChildBefore($icon, $catbarText);
 
 // And put it in a roundframe!
-$roundframe = new Roundframe('This roundframe will contain the Catbar, which will contain the Icon!');
-$roundframe->insertBeforeContent($catbar);
+$roundframe = new Widgets\Roundframe();
+$roundframeText = new Widgets\TextWidget('This roundframe will contain the Catbar, which will contain the Icon!');
+$roundframe->insertChild($roundframeText);
+$roundframe->insertChildBefore($catbar, $roundframeText);
 
 // And output the roundframe.
 echo $roundframe;
@@ -54,20 +62,22 @@ echo $roundframe;
 
 // Some widgets can quickly apply things like additional classes.
 // In this case, the class 'centertext' will be applied.
-new Roundframe('A roundframe!', 'centertext', true);
+$roundframe = new Widgets\Roundframe();
+$roundframe->setAdditionalClasses('centertext');
+$roundframe->insertChild(new Widgets\TextWidget('A test roundframe with centertext!'));
+echo $roundframe;
 
 // If a widget has no parameter for quickly applying attributes, most widgets support manipulating their attributes by calling methods.
 // Here, we set the additional class 'floatright' will be applied on a new Catbar.
-$catbar = new Catbar('A catbar!');
+$catbar = new Widgets\Catbar();
 $catbar->setAdditionalClasses('floatright');
-
-// Most widgets can be manipulated by calling methods.
-$icon = new Icon('help');
+$catbar->insertChild(new Widgets\TextWidget('A floatright catbar!'));
 
 // Here, we set the optional Alt attribute on the icon.
+$icon = new Icon('help');
 $icon->setAlt('This alternative text will be displayed when the icon is not available!');
 
-// We can also get the Alt we just set again.
+// We can also get the Alt attribute we just set again.
 $alt = $icon->getAlt();
 ```
 Result:

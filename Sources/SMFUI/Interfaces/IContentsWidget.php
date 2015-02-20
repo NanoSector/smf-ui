@@ -40,4 +40,39 @@ interface IContentsWidget extends IGenericWidget
 	 * @return string
 	 */
 	public function getContents();
+
+	/**
+	 * Adds a child widget, before the other widget.
+	 * @param object $newWidget The widget to insert.
+	 * @param object $existingWidget The existing widget to insert before.
+	 * @return boolean
+	 */
+	public function insertChildBefore($newWidget, $existingWidget);
+
+	/**
+	 * Adds a child widget at the end of the child list.
+	 * @param object $widget The widget to insert.
+	 * @return void
+	 */
+	public function insertChild($widget);
+
+	/**
+	 * Returns a child from the children array.
+	 * @param int $index The child index.
+	 * @return boolean|object
+	 */
+	public function getChild($index);
+
+	/**
+	 * Searches the children and returns the index of the matching child, or false on failure.
+	 * @param object $widget The child widget to search for.
+	 * @return boolean|int
+	 */
+	public function searchChild($widget);
+
+	/**
+	 * Assembles any children this parent has.
+	 * @return void
+	 */
+	public function assembleChildren();
 }

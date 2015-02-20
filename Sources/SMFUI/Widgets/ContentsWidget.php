@@ -35,11 +35,17 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	protected $contents = '';
 
 	/**
+	 * The children of the widget.
+	 * @var array
+	 */
+	protected $children;
+
+	/**
 	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function __toString()
 	{
-		$insertions = $this->assembleChildren();
+		$this->assembleChildren();
 		$replacements = array(
 			'%contents%' => $this->getContents(),
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
@@ -62,5 +68,63 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	public function getContents()
 	{
 		return $this->contents;
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
+	public function insertChildBefore($newWidget, $existingWidget)
+	{
+		// Try to find the existing widget.
+		if (($existingIndex = $this->searchChild($existingWidget)) === false || !is_object($newWidget))
+			return false;
+
+		// Insert it.
+		array_splice($this->children, $existingIndex, 0, array($newWidget));
+		return true;
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
+	public function insertChild($widget)
+	{
+		$this->children[] = $widget;
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
+	public function getChild($index)
+	{
+		return (array_key_exists($index, $this->children) ? $this->children[$index] : false);
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
+	public function searchChild($widget)
+	{
+		if (!is_object($widget))
+			return false;
+
+		foreach ($this->children as $index => $child)
+		{
+			if ($child == $widget)
+				return $index;
+		}
+		return false;
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
+	public function assembleChildren()
+	{
+		// Start off empty.
+		$this->contents = '';
+
+		foreach ($this->children as $widget)
+			$this->contents .= $widget->__toString();
 	}
 }

@@ -24,35 +24,28 @@
 	SOFTWARE.
 */
 
-namespace SMFUI;
+namespace SMFUI\Widgets;
 
-class IconWidget extends \SMFUI\Widgets\IconTemplateWidget
+class TextWidget extends GenericWidget
 {
-	/**
-	 * The icon database.
-	 * @var array
-	 */
-	private $iconDb = array(
-		'collapse' => 'collapse.gif',
-		'expand' => 'expand.gif',
-		'help' => 'helptopics.gif',
-	);
-
-	public function getHTML()
+	protected $text = '';
+	public function __construct($contents = '')
 	{
-		return '
-		<img class="icon %add_classes%" src="%iconpath%" alt="%alt%" %id% />';
+		$this->setText($contents);
 	}
 
-	public function checkIcon($icon)
+	public function __toString()
 	{
-		return array_key_exists($icon, $this->iconDb);
+		return $this->getText();
 	}
 
-	public function getIconPath($icon)
+	public function setText($text)
 	{
-		global $settings;
+		$this->text = htmlspecialchars($text);
+	}
 
-		return ($settings['images_url'] . '/' . $this->iconDb[$icon]);
+	public function getText()
+	{
+		return $this->text;
 	}
 }
