@@ -29,17 +29,16 @@ namespace SMFUI\Interfaces;
 interface IGenericWidget
 {
 	/**
-	 * Set the contents of the widget, using HTML code.
-	 * @param string $html The HTML code to set the contents to.
+	 * Set the ID of the widget.
 	 * @return void
 	 */
-	public function setContents($html);
+	public function setID($id);
 
 	/**
-	 * Returns the current contents of the widget.
+	 * Gets the ID of the widget.
 	 * @return string
 	 */
-	public function getContents();
+	public function getID();
 
 	/**
 	 * Puts together the pieces of the widget to fluent HTML.

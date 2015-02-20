@@ -24,72 +24,36 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+class IconWidget extends \SMFUI\Widgets\IconTemplateWidget
 {
 	/**
-	 * The contents of the widget.
-	 * @var string
+	 * The icon database.
+	 * @var array
 	 */
-	protected $contents = '';
-
-	/**
-	 * Instance of the template-side widget.
-	 * @var object
-	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
-	 * @var string
-	 */
-	protected $id = '';
-
-	public function setID($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getID()
-	{
-		return $this->id;
-	}
-
-	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
-	 */
-	public function setAdditionalClasses($classes)
-	{
-		$this->classes = $classes;
-	}
-
-	/**
-	 * Gets the additional classes to be applied.
-	 * @return string
-	 */
-	public function getAdditionalClasses()
-	{
-		return $this->classes;
-	}
-
-	public function construct()
-	{
-		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-		);
-		return $this->templateWidget->construct($replacements);
-	}
+	private $iconDb = array(
+		// 'icon name' => 'path relative to images URL'
+		'collapse' => 'collapse.gif',
+		'expand' => 'expand.gif',
+		'help' => 'helptopics.gif',
+	);
 
 	public function getHTML()
 	{
-		return $this->construct();
+		return '
+		<img class="icon %add_classes%" src="%iconpath%" alt="%alt%" />';
 	}
 
-	public function paint()
+	public function checkIcon($icon)
 	{
-		echo $this->construct();
+		return array_key_exists($icon, $this->iconDb);
+	}
+
+	public function getIconPath($icon)
+	{
+		global $settings;
+
+		return ($settings['images_url'] . '/' . $this->iconDb[$icon]);
 	}
 }

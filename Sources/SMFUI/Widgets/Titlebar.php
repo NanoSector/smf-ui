@@ -26,21 +26,14 @@
 
 namespace SMFUI\Widgets;
 
-class Titlebar extends GenericWidget
+class Titlebar extends ContentsWidget
 {
-	public function __construct($html = '')
+	public function __construct($html = '', $paint = false)
 	{
 		$this->templateWidget = new \SMFUI\TitlebarWidget();
+		$this->setContents($html);
 
-		if (!empty($html))
-		{
-			$this->setContents($html);
+		if ($paint)
 			$this->paint();
-		}
-	}
-
-	public function setAdditionalClasses($classes)
-	{
-		$this->templateWidget->setAdditionalClasses($classes);
 	}
 }

@@ -24,72 +24,21 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI\Interfaces;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+interface IIconTemplateWidget extends \SMFUI\Interfaces\IGenericTemplateWidget
 {
 	/**
-	 * The contents of the widget.
-	 * @var string
+	 * Checks the icon availability. Done in the templates because the IconTemplateWidget class must contain a database of available icons.
+	 * @param string $icon The icon name of the icon to check.
+	 * @return boolean
 	 */
-	protected $contents = '';
+	public function checkIcon($icon);
 
 	/**
-	 * Instance of the template-side widget.
-	 * @var object
-	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
-	 * @var string
-	 */
-	protected $id = '';
-
-	public function setID($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getID()
-	{
-		return $this->id;
-	}
-
-	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
-	 */
-	public function setAdditionalClasses($classes)
-	{
-		$this->classes = $classes;
-	}
-
-	/**
-	 * Gets the additional classes to be applied.
+	 * Returns the full icon path. This can be anything the theme wants.
+	 * @param string $icon The icon to get the path from.
 	 * @return string
 	 */
-	public function getAdditionalClasses()
-	{
-		return $this->classes;
-	}
-
-	public function construct()
-	{
-		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-		);
-		return $this->templateWidget->construct($replacements);
-	}
-
-	public function getHTML()
-	{
-		return $this->construct();
-	}
-
-	public function paint()
-	{
-		echo $this->construct();
-	}
+	public function getIconPath($icon);
 }

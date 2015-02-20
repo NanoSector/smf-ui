@@ -26,50 +26,59 @@
 
 namespace SMFUI\Widgets;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 {
 	/**
-	 * The contents of the widget.
+	 * The icon name.
 	 * @var string
 	 */
-	protected $contents = '';
+	private $icon = '';
 
 	/**
-	 * Instance of the template-side widget.
-	 * @var object
-	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
+	 * Alternative text
 	 * @var string
 	 */
-	protected $id = '';
-
-	public function setID($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getID()
-	{
-		return $this->id;
-	}
+	private $alt = '';
 
 	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
+	 * Additional classes for the widget.
+	 * @var string
 	 */
+	protected $classes = '';
+
+	public function __construct($icon, $paint = false)
+	{
+		$this->setIcon($icon);
+		$this->templateWidget = new \SMFUI\IconWidget();
+		if (!$this->templateWidget->checkIcon($icon))
+			return false;
+	}
+
+	public function setIcon($icon)
+	{
+		$this->icon = $icon;
+	}
+
+	public function getIcon()
+	{
+		return $this->icon;
+	}
+
+	public function setAlt($alt)
+	{
+		$this->alt = $alt;
+	}
+
+	public function getAlt()
+	{
+		return $this->alt;
+	}
+
 	public function setAdditionalClasses($classes)
 	{
 		$this->classes = $classes;
 	}
 
-	/**
-	 * Gets the additional classes to be applied.
-	 * @return string
-	 */
 	public function getAdditionalClasses()
 	{
 		return $this->classes;
@@ -77,19 +86,13 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 
 	public function construct()
 	{
+		if (empty($icon))
 		$replacements = array(
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+			'%iconpath%' => $this->templateWidget->getIconPath($this->getIcon()),
+			'%alt%' => $this->getAlt(),
+			'%add_classes%' => $this->getAdditionalClasses(),
 		);
 		return $this->templateWidget->construct($replacements);
-	}
-
-	public function getHTML()
-	{
-		return $this->construct();
-	}
-
-	public function paint()
-	{
-		echo $this->construct();
 	}
 }

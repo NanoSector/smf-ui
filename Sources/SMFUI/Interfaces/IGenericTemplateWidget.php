@@ -33,7 +33,7 @@ interface IGenericTemplateWidget
 	 * @param string $contents The contents to put in the widget.
 	 * @return string The HTML of the entire widget.
 	 */
-	public function construct($contents);
+	public function construct($replacement);
 
 	/**
 	 * Return the skeleton HTML code.

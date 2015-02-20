@@ -26,24 +26,8 @@
 
 namespace SMFUI;
 
-class TitlebarWidget implements \SMFUI\Interfaces\IGenericTemplateWidget
+class TitlebarWidget extends \SMFUI\Widgets\GenericTemplateWidget
 {
-	/**
-	 * Any additional classes you'd want on this widget.
-	 * @var string
-	 */
-	private $additionalClasses = '';
-	public function construct($contents)
-	{
-		$html = $this->getHTML();
-		return str_replace(array('%contents%', '%add_classes%'), array($contents, $this->additionalClasses), $html);
-	}
-
-	public function setAdditionalClasses($classes)
-	{
-		$this->additionalClasses = $classes;
-	}
-
 	public function getHTML()
 	{
 		return '

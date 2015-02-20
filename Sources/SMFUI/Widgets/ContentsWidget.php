@@ -26,7 +26,7 @@
 
 namespace SMFUI\Widgets;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces\IContentsWidget
 {
 	/**
 	 * The contents of the widget.
@@ -35,41 +35,26 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	protected $contents = '';
 
 	/**
-	 * Instance of the template-side widget.
-	 * @var object
-	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
+	 * Additional classes for the widget.
 	 * @var string
 	 */
-	protected $id = '';
+	protected $classes = '';
 
-	public function setID($id)
+	public function setContents($html)
 	{
-		$this->id = $id;
+		$this->contents = $html;
 	}
 
-	public function getID()
+	public function getContents()
 	{
-		return $this->id;
+		return $this->contents;
 	}
 
-	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
-	 */
 	public function setAdditionalClasses($classes)
 	{
 		$this->classes = $classes;
 	}
 
-	/**
-	 * Gets the additional classes to be applied.
-	 * @return string
-	 */
 	public function getAdditionalClasses()
 	{
 		return $this->classes;
@@ -78,18 +63,10 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	public function construct()
 	{
 		$replacements = array(
+			'%contents%' => $this->getContents(),
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+			'%add_classes%' => $this->getAdditionalClasses(),
 		);
 		return $this->templateWidget->construct($replacements);
-	}
-
-	public function getHTML()
-	{
-		return $this->construct();
-	}
-
-	public function paint()
-	{
-		echo $this->construct();
 	}
 }

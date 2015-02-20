@@ -26,70 +26,11 @@
 
 namespace SMFUI\Widgets;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+abstract class GenericTemplateWidget implements \SMFUI\Interfaces\IGenericTemplateWidget
 {
-	/**
-	 * The contents of the widget.
-	 * @var string
-	 */
-	protected $contents = '';
-
-	/**
-	 * Instance of the template-side widget.
-	 * @var object
-	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
-	 * @var string
-	 */
-	protected $id = '';
-
-	public function setID($id)
+	public function construct($replacement)
 	{
-		$this->id = $id;
-	}
-
-	public function getID()
-	{
-		return $this->id;
-	}
-
-	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
-	 */
-	public function setAdditionalClasses($classes)
-	{
-		$this->classes = $classes;
-	}
-
-	/**
-	 * Gets the additional classes to be applied.
-	 * @return string
-	 */
-	public function getAdditionalClasses()
-	{
-		return $this->classes;
-	}
-
-	public function construct()
-	{
-		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-		);
-		return $this->templateWidget->construct($replacements);
-	}
-
-	public function getHTML()
-	{
-		return $this->construct();
-	}
-
-	public function paint()
-	{
-		echo $this->construct();
+		$html = $this->getHTML();
+		return str_replace(array_keys($replacement), array_values($replacement), $html);
 	}
 }

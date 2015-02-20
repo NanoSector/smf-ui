@@ -24,72 +24,33 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI\Interfaces;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+interface IContentsWidget extends IGenericWidget
 {
 	/**
-	 * The contents of the widget.
-	 * @var string
+	 * Set the contents of the widget, using HTML code.
+	 * @param string $html The HTML code to set the contents to.
+	 * @return void
 	 */
-	protected $contents = '';
+	public function setContents($html);
 
 	/**
-	 * Instance of the template-side widget.
-	 * @var object
+	 * Returns the current contents of the widget.
+	 * @return string
 	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
-	 * @var string
-	 */
-	protected $id = '';
-
-	public function setID($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getID()
-	{
-		return $this->id;
-	}
+	public function getContents();
 
 	/**
 	 * Set additional classes to be applied for this widget.
 	 * @param string $classes
 	 * @return void
 	 */
-	public function setAdditionalClasses($classes)
-	{
-		$this->classes = $classes;
-	}
+	public function setAdditionalClasses($classes);
 
 	/**
 	 * Gets the additional classes to be applied.
 	 * @return string
 	 */
-	public function getAdditionalClasses()
-	{
-		return $this->classes;
-	}
-
-	public function construct()
-	{
-		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-		);
-		return $this->templateWidget->construct($replacements);
-	}
-
-	public function getHTML()
-	{
-		return $this->construct();
-	}
-
-	public function paint()
-	{
-		echo $this->construct();
-	}
+	public function getAdditionalClasses();
 }
