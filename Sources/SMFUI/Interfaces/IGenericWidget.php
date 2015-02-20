@@ -44,17 +44,5 @@ interface IGenericWidget
 	 * Puts together the pieces of the widget to fluent HTML.
 	 * @return string The HTML of the entire widget.
 	 */
-	public function construct();
-
-	/**
-	 * Return the pure HTML code of the widget in its current state.
-	 * @return string
-	 */
-	public function getHTML();
-
-	/**
-	 * Prints the element on the screen.
-	 * @return void
-	 */
-	public function paint();
+	public function __toString();
 }

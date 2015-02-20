@@ -46,6 +46,23 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	 */
 	protected $id = '';
 
+	/**
+	 * Widgets to insert.
+	 * @var array
+	 */
+	protected $children = array();
+
+	public function __toString()
+	{
+		$insertions = $this->assembleChildren();
+		$replacements = array(
+			'%after%' => !empty($insertions['after']) ? $insertions['after'] : '',
+			'%before%' => !empty($insertions['before']) ? $insertions['before'] : '',
+			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+		);
+		return $this->templateWidget->assemble($replacements);
+	}
+
 	public function setID($id)
 	{
 		$this->id = $id;
@@ -75,21 +92,46 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 		return $this->classes;
 	}
 
-	public function construct()
+	/**
+	 * Insert a child widget before the main widget.
+	 * @param object $widget The widget object to insert.
+	 * @return void
+	 */
+	public function insertBefore($widget)
 	{
-		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-		);
-		return $this->templateWidget->construct($replacements);
+		if (is_object($widget))
+			$this->children['before'][] = $widget;
 	}
 
-	public function getHTML()
+	/**
+	 * Insert a child widget after the main widget.
+	 * @param object $widget The widget object to insert.
+	 * @return void
+	 */
+	public function insertAfter($widget)
 	{
-		return $this->construct();
+		if (is_object($widget))
+			$this->children['after'][] = $widget;
 	}
 
-	public function paint()
+	/**
+	 * Constructs the children.
+	 * @return void
+	 */
+	public function assembleChildren()
 	{
-		echo $this->construct();
+		$insertions = array();
+		foreach ($this->children as $pos => $widgets)
+		{
+			if (!array_key_exists($pos, $insertions))
+				$insertions[$pos] = '';
+
+			foreach ($widgets as $widget)
+			{
+				$insertions[$pos] .= $widget;
+			}
+		}
+		echo var_dump($insertions);
+		return $insertions;
 	}
 }

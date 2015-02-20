@@ -28,7 +28,7 @@ namespace SMFUI\Widgets;
 
 abstract class GenericTemplateWidget implements \SMFUI\Interfaces\IGenericTemplateWidget
 {
-	public function construct($replacement)
+	public function assemble($replacement)
 	{
 		$html = $this->getHTML();
 		return str_replace(array_keys($replacement), array_values($replacement), $html);

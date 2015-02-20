@@ -40,6 +40,43 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	 */
 	protected $classes = '';
 
+	public function __toString()
+	{
+		$insertions = $this->assembleChildren();
+		$replacements = array(
+			'%after%' => !empty($insertions['after']) ? $insertions['after'] : '',
+			'%before%' => !empty($insertions['before']) ? $insertions['before'] : '',
+			'%afterContent%' => !empty($insertions['afterContent']) ? $insertions['afterContent'] : '',
+			'%beforeContent%' => !empty($insertions['beforeContent']) ? $insertions['beforeContent'] : '',
+			'%contents%' => $this->getContents(),
+			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+			'%add_classes%' => $this->getAdditionalClasses(),
+		);
+		return $this->templateWidget->assemble($replacements);
+	}
+
+	/**
+	 * Insert a child widget before the main widget's content.
+	 * @param object $widget The widget object to insert.
+	 * @return void
+	 */
+	public function insertBeforeContent($widget)
+	{
+		if (is_object($widget))
+			$this->children['beforeContent'][] = $widget;
+	}
+
+	/**
+	 * Insert a child widget after the main widget's content.
+	 * @param object $widget The widget object to insert.
+	 * @return void
+	 */
+	public function insertAfterContent($widget)
+	{
+		if (is_object($widget))
+			$this->children['afterContent'][] = $widget;
+	}
+
 	public function setContents($html)
 	{
 		$this->contents = $html;
@@ -58,15 +95,5 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	public function getAdditionalClasses()
 	{
 		return $this->classes;
-	}
-
-	public function construct()
-	{
-		$replacements = array(
-			'%contents%' => $this->getContents(),
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-			'%add_classes%' => $this->getAdditionalClasses(),
-		);
-		return $this->templateWidget->construct($replacements);
 	}
 }

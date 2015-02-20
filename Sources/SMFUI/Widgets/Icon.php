@@ -46,7 +46,7 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 	 */
 	protected $classes = '';
 
-	public function __construct($icon, $paint = false)
+	public function __construct($icon)
 	{
 		$this->setIcon($icon);
 		$this->templateWidget = new \SMFUI\IconWidget();

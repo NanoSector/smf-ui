@@ -28,13 +28,9 @@ namespace SMFUI\Widgets;
 
 class Roundframe extends ContentsWidget
 {
-	public function __construct($html = '', $classes = '', $paint = false)
+	public function __construct($contents = '')
 	{
 		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setAdditionalClasses($classes);
-		$this->setContents($html);
-
-		if ($paint)
-			$this->paint();
+		$this->setContents($contents);
 	}
 }

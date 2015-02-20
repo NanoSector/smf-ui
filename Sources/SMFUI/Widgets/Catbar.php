@@ -28,12 +28,9 @@ namespace SMFUI\Widgets;
 
 class Catbar extends ContentsWidget
 {
-	public function __construct($html = '', $paint = false)
+	public function __construct($contents = '')
 	{
 		$this->templateWidget = new \SMFUI\CatbarWidget();
-		$this->setContents($html);
-
-		if ($paint)
-			$this->paint();
+		$this->setContents($contents);
 	}
 }

@@ -31,8 +31,8 @@ class CatbarWidget extends \SMFUI\Widgets\GenericTemplateWidget
 	public function getHTML()
 	{
 		return '
-		<div class="cat_bar %add_classes%">
-			<h3 class="catbg">%contents%</h3>
-		</div>';
+		%before%<div class="cat_bar %add_classes%">
+			<h3 class="catbg">%beforeContent%%contents%%afterContent%</h3>
+		</div>%after%';
 	}
 }
