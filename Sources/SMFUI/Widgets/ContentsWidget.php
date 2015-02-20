@@ -35,11 +35,8 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	protected $contents = '';
 
 	/**
-	 * Additional classes for the widget.
-	 * @var string
+	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
-	protected $classes = '';
-
 	public function __toString()
 	{
 		$insertions = $this->assembleChildren();
@@ -56,9 +53,7 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	}
 
 	/**
-	 * Insert a child widget before the main widget's content.
-	 * @param object $widget The widget object to insert.
-	 * @return void
+	 * @see \SMFUI\Interfaces\IContentsWidget
 	 */
 	public function insertBeforeContent($widget)
 	{
@@ -67,9 +62,7 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	}
 
 	/**
-	 * Insert a child widget after the main widget's content.
-	 * @param object $widget The widget object to insert.
-	 * @return void
+	 * @see \SMFUI\Interfaces\IContentsWidget
 	 */
 	public function insertAfterContent($widget)
 	{
@@ -77,23 +70,19 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 			$this->children['afterContent'][] = $widget;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
 	public function setContents($html)
 	{
 		$this->contents = $html;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
 	public function getContents()
 	{
 		return $this->contents;
-	}
-
-	public function setAdditionalClasses($classes)
-	{
-		$this->classes = $classes;
-	}
-
-	public function getAdditionalClasses()
-	{
-		return $this->classes;
 	}
 }

@@ -40,48 +40,63 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 	 */
 	private $alt = '';
 
-	/**
-	 * Additional classes for the widget.
-	 * @var string
-	 */
-	protected $classes = '';
-
 	public function __construct($icon)
 	{
 		$this->setIcon($icon);
 		$this->templateWidget = new \SMFUI\IconWidget();
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IIconWidget
+	 */
 	public function setIcon($icon)
 	{
 		$this->icon = $icon;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IIconWidget
+	 */
 	public function getIcon()
 	{
 		return $this->icon;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IIconWidget
+	 */
 	public function setAlt($alt)
 	{
 		$this->alt = $alt;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IIconWidget
+	 */
 	public function getAlt()
 	{
 		return $this->alt;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IIconWidget
+	 */
 	public function setAdditionalClasses($classes)
 	{
 		$this->classes = $classes;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IIconWidget
+	 */
 	public function getAdditionalClasses()
 	{
 		return $this->classes;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
 	public function __toString()
 	{
 		$replacements = array(

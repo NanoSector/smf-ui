@@ -58,6 +58,9 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	 */
 	protected $classes = array();
 
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
 	public function __toString()
 	{
 		$insertions = $this->assembleChildren();
@@ -69,20 +72,24 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 		return $this->templateWidget->assemble($replacements);
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
 	public function setID($id)
 	{
 		$this->id = $id;
 	}
 
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
 	public function getID()
 	{
 		return $this->id;
 	}
 
 	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
+	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function setAdditionalClasses($classes)
 	{
@@ -90,8 +97,7 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	}
 
 	/**
-	 * Gets the additional classes to be applied.
-	 * @return string
+	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function getAdditionalClasses()
 	{
@@ -99,9 +105,7 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	}
 
 	/**
-	 * Insert a child widget before the main widget.
-	 * @param object $widget The widget object to insert.
-	 * @return void
+	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function insertBefore($widget)
 	{
@@ -110,9 +114,7 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	}
 
 	/**
-	 * Insert a child widget after the main widget.
-	 * @param object $widget The widget object to insert.
-	 * @return void
+	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function insertAfter($widget)
 	{
@@ -121,8 +123,7 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	}
 
 	/**
-	 * Constructs the children.
-	 * @return void
+	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function assembleChildren()
 	{

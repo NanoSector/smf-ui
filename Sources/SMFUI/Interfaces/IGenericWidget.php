@@ -29,6 +29,12 @@ namespace SMFUI\Interfaces;
 interface IGenericWidget
 {
 	/**
+	 * Puts together the pieces of the widget to fluent HTML.
+	 * @return string The HTML of the entire widget.
+	 */
+	public function __toString();
+
+	/**
 	 * Set the ID of the widget.
 	 * @return void
 	 */
@@ -41,8 +47,48 @@ interface IGenericWidget
 	public function getID();
 
 	/**
-	 * Puts together the pieces of the widget to fluent HTML.
-	 * @return string The HTML of the entire widget.
+	 * Set additional classes to be applied for this widget.
+	 * @param string $classes
+	 * @return void
 	 */
-	public function __toString();
+	public function setAdditionalClasses($classes);
+
+	/**
+	 * Gets the additional classes to be applied.
+	 * @return string[]
+	 */
+	public function getAdditionalClasses();
+
+	/**
+	 * Set custom HTML parameters on the element.
+	 * @param array $params Parameters in form 'key' => 'value', will be parsed into key="value"
+	 * @return void
+	 */
+	public function setHTMLParams($params);
+
+	/**
+	 * Get the custom HTML elements.
+	 * @return array
+	 */
+	public function getHTMLParams();
+
+	/**
+	 * Insert a child widget before the main widget.
+	 * @param object $widget The widget object to insert.
+	 * @return void
+	 */
+	public function insertBefore($widget);
+
+	/**
+	 * Insert a child widget after the main widget.
+	 * @param object $widget The widget object to insert.
+	 * @return void
+	 */
+	public function insertAfter($widget);
+
+	/**
+	 * Assembles the children.
+	 * @return void
+	 */
+	public function assembleChildren();
 }

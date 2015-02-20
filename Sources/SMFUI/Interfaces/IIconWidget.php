@@ -53,17 +53,4 @@ interface IIconWidget extends IGenericWidget
 	 * @return string
 	 */
 	public function getAlt();
-
-	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
-	 * @return void
-	 */
-	public function setAdditionalClasses($classes);
-
-	/**
-	 * Gets the additional classes to be applied.
-	 * @return string
-	 */
-	public function getAdditionalClasses();
 }

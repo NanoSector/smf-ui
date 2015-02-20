@@ -42,15 +42,16 @@ interface IContentsWidget extends IGenericWidget
 	public function getContents();
 
 	/**
-	 * Set additional classes to be applied for this widget.
-	 * @param string $classes
+	 * Insert a child widget before the main widget's content.
+	 * @param object $widget The widget object to insert.
 	 * @return void
 	 */
-	public function setAdditionalClasses($classes);
+	public function insertBeforeContent($widget);
 
 	/**
-	 * Gets the additional classes to be applied.
-	 * @return string[]
+	 * Insert a child widget after the main widget's content.
+	 * @param object $widget The widget object to insert.
+	 * @return void
 	 */
-	public function getAdditionalClasses();
+	public function insertAfterContent($widget);
 }
