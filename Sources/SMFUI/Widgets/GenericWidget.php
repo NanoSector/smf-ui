@@ -59,6 +59,12 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	protected $classes = array();
 
 	/**
+	 * HTML parameters.
+	 * @var array
+	 */
+	protected $params = array();
+
+	/**
 	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function __toString()
@@ -102,6 +108,22 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	public function getAdditionalClasses()
 	{
 		return $this->classes;
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
+	public function setHTMLParams($params)
+	{
+		$this->params[array_keys($params)[0]] = array_values($params)[0];
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
+	public function getHTMLParams()
+	{
+		return $this->params;
 	}
 
 	/**

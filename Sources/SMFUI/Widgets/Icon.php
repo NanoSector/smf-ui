@@ -79,22 +79,6 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 	}
 
 	/**
-	 * @see \SMFUI\Interfaces\IIconWidget
-	 */
-	public function setAdditionalClasses($classes)
-	{
-		$this->classes = $classes;
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IIconWidget
-	 */
-	public function getAdditionalClasses()
-	{
-		return $this->classes;
-	}
-
-	/**
 	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function __toString()
