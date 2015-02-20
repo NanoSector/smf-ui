@@ -24,23 +24,31 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI;
 
-class Catbar extends GenericWidget
+class RoundframeWidget implements \SMFUI\Interfaces\IGenericTemplateWidget
 {
-	public function __construct($html = '')
+	/**
+	 * Any additional classes you'd want on this widget.
+	 * @var string
+	 */
+	private $additionalClasses = '';
+	public function construct($contents)
 	{
-		$this->templateWidget = new \SMFUI\CatbarWidget();
-
-		if (!empty($html))
-		{
-			$this->setContents($html);
-			$this->paint();
-		}
+		$html = $this->getHTML();
+		return str_replace(array('%contents%', '%add_classes%'), array($contents, $this->additionalClasses), $html);
 	}
 
 	public function setAdditionalClasses($classes)
 	{
-		$this->templateWidget->setAdditionalClasses($classes);
+		$this->additionalClasses = $classes;
+	}
+
+	public function getHTML()
+	{
+		return '
+		<span class="upperframe"><span></span></span>
+		<div class="roundframe %add_classes%">%contents%</div>
+		<span class="lowerframe"><span></span></span>';
 	}
 }

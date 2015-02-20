@@ -53,11 +53,11 @@ class Autoloader
 
 		foreach ($paths as $path)
 		{
-			if(file_exists($path))
-			{
-				require $path;
-				return true;
-			}
+			if (!file_exists($path))
+				continue;
+
+			require $path;
+			return true;
 		}
 
 		return false;

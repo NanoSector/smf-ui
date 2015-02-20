@@ -28,7 +28,7 @@ namespace SMFUI\Widgets;
 
 class Titlebar extends GenericWidget
 {
-	public function __construct($html)
+	public function __construct($html = '')
 	{
 		$this->templateWidget = new \SMFUI\TitlebarWidget();
 
@@ -37,5 +37,10 @@ class Titlebar extends GenericWidget
 			$this->setContents($html);
 			$this->paint();
 		}
+	}
+
+	public function setAdditionalClasses($classes)
+	{
+		$this->templateWidget->setAdditionalClasses($classes);
 	}
 }

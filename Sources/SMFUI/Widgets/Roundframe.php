@@ -26,14 +26,15 @@
 
 namespace SMFUI\Widgets;
 
-class Catbar extends GenericWidget
+class Roundframe extends GenericWidget
 {
-	public function __construct($html = '')
+	public function __construct($html = '', $classes = '')
 	{
-		$this->templateWidget = new \SMFUI\CatbarWidget();
+		$this->templateWidget = new \SMFUI\RoundframeWidget();
 
 		if (!empty($html))
 		{
+			$this->setAdditionalClasses($classes);
 			$this->setContents($html);
 			$this->paint();
 		}

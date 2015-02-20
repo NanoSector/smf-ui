@@ -28,16 +28,26 @@ namespace SMFUI;
 
 class CatbarWidget implements \SMFUI\Interfaces\IGenericTemplateWidget
 {
+	/**
+	 * Any additional classes you'd want on this widget.
+	 * @var string
+	 */
+	private $additionalClasses = '';
 	public function construct($contents)
 	{
 		$html = $this->getHTML();
-		return str_replace('%contents%', $contents, $html);
+		return str_replace(array('%contents%', '%add_classes%'), array($contents, $this->additionalClasses), $html);
+	}
+
+	public function setAdditionalClasses($classes)
+	{
+		$this->additionalClasses = $classes;
 	}
 
 	public function getHTML()
 	{
 		return '
-		<div class="cat_bar">
+		<div class="cat_bar %add_classes%">
 			<h3 class="catbg">%contents%</h3>
 		</div>';
 	}
