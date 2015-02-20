@@ -87,7 +87,7 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
 			'%iconpath%' => $this->templateWidget->getIconPath($this->getIcon()),
 			'%alt%' => $this->getAlt(),
-			'%add_classes%' => $this->getAdditionalClasses(),
+			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
 		);
 		return $this->templateWidget->assemble($replacements);
 	}

@@ -65,15 +65,22 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	protected $params = array();
 
 	/**
+	 * Replacements for the HTML code.
+	 * @var array
+	 */
+	protected $replacements = array();
+
+	/**
+	 * Set up some items of the class.
+
+	/**
 	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function __toString()
 	{
-		$insertions = $this->assembleChildren();
 		$replacements = array(
-			'%after%' => !empty($insertions['after']) ? $insertions['after'] : '',
-			'%before%' => !empty($insertions['before']) ? $insertions['before'] : '',
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
 		);
 		return $this->templateWidget->assemble($replacements);
 	}
@@ -108,58 +115,5 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	public function getAdditionalClasses()
 	{
 		return $this->classes;
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function setHTMLParams($params)
-	{
-		$this->params[array_keys($params)[0]] = array_values($params)[0];
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function getHTMLParams()
-	{
-		return $this->params;
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function insertBefore($widget)
-	{
-		if (is_object($widget))
-			$this->children['before'][] = $widget;
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function insertAfter($widget)
-	{
-		if (is_object($widget))
-			$this->children['after'][] = $widget;
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function assembleChildren()
-	{
-		$insertions = array();
-		foreach ($this->children as $pos => $widgets)
-		{
-			if (!array_key_exists($pos, $insertions))
-				$insertions[$pos] = '';
-
-			foreach ($widgets as $widget)
-			{
-				$insertions[$pos] .= $widget;
-			}
-		}
-		return $insertions;
 	}
 }

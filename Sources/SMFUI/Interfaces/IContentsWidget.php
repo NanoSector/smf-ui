@@ -40,18 +40,4 @@ interface IContentsWidget extends IGenericWidget
 	 * @return string
 	 */
 	public function getContents();
-
-	/**
-	 * Insert a child widget before the main widget's content.
-	 * @param object $widget The widget object to insert.
-	 * @return void
-	 */
-	public function insertBeforeContent($widget);
-
-	/**
-	 * Insert a child widget after the main widget's content.
-	 * @param object $widget The widget object to insert.
-	 * @return void
-	 */
-	public function insertAfterContent($widget);
 }

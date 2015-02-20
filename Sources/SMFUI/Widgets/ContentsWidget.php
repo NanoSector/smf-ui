@@ -41,33 +41,11 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	{
 		$insertions = $this->assembleChildren();
 		$replacements = array(
-			'%after%' => !empty($insertions['after']) ? $insertions['after'] : '',
-			'%before%' => !empty($insertions['before']) ? $insertions['before'] : '',
-			'%afterContent%' => !empty($insertions['afterContent']) ? $insertions['afterContent'] : '',
-			'%beforeContent%' => !empty($insertions['beforeContent']) ? $insertions['beforeContent'] : '',
 			'%contents%' => $this->getContents(),
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-			'%add_classes%' => $this->getAdditionalClasses(),
+			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
 		);
 		return $this->templateWidget->assemble($replacements);
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IContentsWidget
-	 */
-	public function insertBeforeContent($widget)
-	{
-		if (is_object($widget))
-			$this->children['beforeContent'][] = $widget;
-	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IContentsWidget
-	 */
-	public function insertAfterContent($widget)
-	{
-		if (is_object($widget))
-			$this->children['afterContent'][] = $widget;
 	}
 
 	/**
