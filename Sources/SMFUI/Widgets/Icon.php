@@ -50,8 +50,6 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 	{
 		$this->setIcon($icon);
 		$this->templateWidget = new \SMFUI\IconWidget();
-		if (!$this->templateWidget->checkIcon($icon))
-			return false;
 	}
 
 	public function setIcon($icon)
@@ -84,15 +82,14 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 		return $this->classes;
 	}
 
-	public function construct()
+	public function __toString()
 	{
-		if (empty($icon))
 		$replacements = array(
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
 			'%iconpath%' => $this->templateWidget->getIconPath($this->getIcon()),
 			'%alt%' => $this->getAlt(),
 			'%add_classes%' => $this->getAdditionalClasses(),
 		);
-		return $this->templateWidget->construct($replacements);
+		return $this->templateWidget->assemble($replacements);
 	}
 }

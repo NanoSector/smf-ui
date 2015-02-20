@@ -52,6 +52,12 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	 */
 	protected $children = array();
 
+	/**
+	 * Custom classes.
+	 * @var string[]
+	 */
+	protected $classes = array();
+
 	public function __toString()
 	{
 		$insertions = $this->assembleChildren();
@@ -131,7 +137,6 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 				$insertions[$pos] .= $widget;
 			}
 		}
-		echo var_dump($insertions);
 		return $insertions;
 	}
 }

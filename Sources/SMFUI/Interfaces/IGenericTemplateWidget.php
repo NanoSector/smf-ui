@@ -30,7 +30,7 @@ interface IGenericTemplateWidget
 {
 	/**
 	 * Puts together the pieces of the widget to fluent HTML.
-	 * @param string $contents The contents to put in the widget.
+	 * @param string $replacement The replacement to make in the widget code.
 	 * @return string The HTML of the entire widget.
 	 */
 	public function assemble($replacement);

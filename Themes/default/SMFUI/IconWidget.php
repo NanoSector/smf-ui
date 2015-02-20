@@ -33,7 +33,6 @@ class IconWidget extends \SMFUI\Widgets\IconTemplateWidget
 	 * @var array
 	 */
 	private $iconDb = array(
-		// 'icon name' => 'path relative to images URL'
 		'collapse' => 'collapse.gif',
 		'expand' => 'expand.gif',
 		'help' => 'helptopics.gif',

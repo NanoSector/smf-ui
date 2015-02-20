@@ -23,32 +23,30 @@ use SMFUI\Widgets;
  * Simple widgets.
  */
 
-// Create a new Catbar with the text "A new catbar!" in its header.
-// The second parameter, true in this case, tells the framework to directly paint it on the screen. This is always the last parameter.
-new Catbar('A new catbar!', true);
+// Create a new Catbar with the text "A new catbar!" in its header. It can be directly echo'ed to the page.
+echo new Catbar('A new catbar!');
 
-// Create a new Titlebar with the text "Testing!" in its header. This will also be automagically painted.
-new Titlebar('Testing!', true);
+// Create a new Titlebar with the text "Testing!" in its header and also directly echo it.
+echo new Titlebar('Testing!');
 
 /*
  * Nested widgets
  */
 
-// We would like an icon.
-$icon = new Icon('help');
-
-// Get the HTML for this icon.
-$iconHTML = $icon->getHTML();
-
 // Create a Catbar...
-// The catbar will contain the icon (we got its HTML).
+// The catbar will contain the icon.
 $catbar = new Catbar($iconHTML . 'A catbar!');
 
-// Get the HTML from the catbar...
-$catHTML = $catbar->getHTML();
+// We would like an icon, before the content.
+$icon = new Icon('help');
+$catbar->addBeforeContent($icon);
 
 // And put it in a roundframe!
-new Roundframe($catHTML . 'This roundframe will contain the Catbar, which will contain the Icon!', '', true);
+$roundframe = new Roundframe('This roundframe will contain the Catbar, which will contain the Icon!');
+$roundframe->addBeforeContent($catbar);
+
+// And output the roundframe.
+echo $roundframe;
 
 /*
  * Widgets with additional attributes
