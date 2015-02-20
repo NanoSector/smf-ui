@@ -33,6 +33,12 @@ class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	 * @var string
 	 */
 	protected $contents = '';
+	
+	/**
+	 * Instance of the template-side widget.
+	 * @var object
+	 */
+	protected $templateWidget;
 
 	public function setContents($html)
 	{

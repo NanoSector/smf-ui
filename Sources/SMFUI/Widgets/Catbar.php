@@ -28,12 +28,6 @@ namespace SMFUI\Widgets;
 
 class Catbar extends GenericWidget
 {
-	/**
-	 * Instance of the template-side widget.
-	 * @var SMFUI\CatbarWidget
-	 */
-	protected $templateWidget;
-
 	public function __construct($html)
 	{
 		$this->templateWidget = new \SMFUI\CatbarWidget();
