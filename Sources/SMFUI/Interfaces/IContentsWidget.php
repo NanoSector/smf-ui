@@ -50,7 +50,7 @@ interface IContentsWidget extends IGenericWidget
 
 	/**
 	 * Gets the additional classes to be applied.
-	 * @return string
+	 * @return string[]
 	 */
 	public function getAdditionalClasses();
 }
