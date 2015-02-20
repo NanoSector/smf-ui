@@ -39,11 +39,11 @@ $catbar = new Catbar($iconHTML . 'A catbar!');
 
 // We would like an icon, before the content.
 $icon = new Icon('help');
-$catbar->addBeforeContent($icon);
+$catbar->insertBeforeContent($icon);
 
 // And put it in a roundframe!
 $roundframe = new Roundframe('This roundframe will contain the Catbar, which will contain the Icon!');
-$roundframe->addBeforeContent($catbar);
+$roundframe->insertBeforeContent($catbar);
 
 // And output the roundframe.
 echo $roundframe;
