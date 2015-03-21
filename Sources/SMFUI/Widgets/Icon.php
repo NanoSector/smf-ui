@@ -84,7 +84,7 @@ class Icon extends GenericWidget implements \SMFUI\Interfaces\IIconWidget
 	public function __toString()
 	{
 		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+			'%id%' => !empty($this->id) ? 'id="'.$this->getID().'"' : '',
 			'%iconpath%' => $this->templateWidget->getIconPath($this->getIcon()),
 			'%alt%' => $this->getAlt(),
 			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),

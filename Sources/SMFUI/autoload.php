@@ -41,14 +41,14 @@ class Autoloader
 		$class = explode('\\', $class);
 		$classpath = $class;
 		array_pop($classpath);
-		$classname = end($class) . '.php';
+		$classname = end($class).'.php';
 
 		// Assemble path
-		$classpath = implode('/', $classpath) . '/';
+		$classpath = implode('/', $classpath).'/';
 
 		$paths = array(
-			$sourcedir .  '/' . $classpath . $classname,
-			$settings['actual_theme_dir'] . '/' . $classpath . $classname,
+			$sourcedir.'/'.$classpath.$classname,
+			$settings['actual_theme_dir'].'/'.$classpath.$classname,
 		);
 
 		foreach ($paths as $path)

@@ -36,7 +36,7 @@ class Paragraph extends GenericWidget
 
 	public function __toString()
 	{
-		return '<p>' . $this->getText() . '</p>';
+		return '<p>'.$this->getText().'</p>';
 	}
 
 	public function setText($text)
