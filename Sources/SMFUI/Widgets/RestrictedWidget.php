@@ -56,7 +56,7 @@ abstract class RestrictedWidget extends ContentsWidget implements \SMFUI\Interfa
 	/**
 	 * @see \SMFUI\Interfaces\IRestrictedWidget
 	 */
-	abstract function construct($contents = '');
+	abstract public function construct($contents = '');
 
 	/**
 	 * Checks if the widget complies to our filters.

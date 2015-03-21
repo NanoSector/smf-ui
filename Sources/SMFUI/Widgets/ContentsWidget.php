@@ -129,7 +129,7 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 		foreach ($this->children as $index => $child)
 		{
 			if ($child == $widget)
-				return $index;
+				return (int) $index;
 		}
 		return false;
 	}
