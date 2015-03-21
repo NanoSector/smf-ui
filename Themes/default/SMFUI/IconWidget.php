@@ -56,12 +56,12 @@ class IconWidget extends \SMFUI\Widgets\IconTemplateWidget
 	public function checkIcon($icon)
 	{
 		global $settings;
-		return array_key_exists($icon, $this->iconDb) || file_exists($settings['theme_dir'] . '/images/' . $icon . '.gif');
+		return array_key_exists($icon, $this->iconDb) || file_exists($settings['theme_dir'].'/images/'.$icon.'.gif');
 	}
 
 	public function getIconPath($icon)
 	{
 		global $settings;
-		return ($settings['images_url'] . '/' . (!empty($this->iconDb[$icon]) ? $this->iconDb[$icon] : $icon . '.gif'));
+		return ($settings['images_url'].'/'.(!empty($this->iconDb[$icon]) ? $this->iconDb[$icon] : $icon.'.gif'));
 	}
 }
