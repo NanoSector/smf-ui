@@ -79,7 +79,7 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	public function __toString()
 	{
 		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="'.$this->getID().'"' : '',
+			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
 			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
 		);
 		return $this->templateWidget->assemble($replacements);

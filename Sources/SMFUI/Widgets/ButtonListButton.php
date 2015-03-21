@@ -41,7 +41,7 @@ class ButtonListButton extends GenericWidget
 	{
 		
 		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="'.$this->getID().'"' : '',
+			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
 			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
 			'%text%' => $this->getText(),
 			'%url%' => $this->getURL(),

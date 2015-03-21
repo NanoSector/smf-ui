@@ -39,7 +39,7 @@ class Base
 	{
 		global $sourcedir;
 
-		require_once($sourcedir.'/SMFUI/autoload.php');
+		require_once($sourcedir . '/SMFUI/autoload.php');
 		spl_autoload_register('SMFUI\Autoloader::load');
 	}
 }
