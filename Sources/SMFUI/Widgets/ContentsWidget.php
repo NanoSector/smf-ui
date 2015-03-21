@@ -51,7 +51,7 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 		$this->assembleChildren();
 		$replacements = array(
 			'%contents%' => $this->getContents(),
-			'%id%' => !empty($this->id) ? 'id="'.$this->getID().'"' : '',
+			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
 			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
 		);
 		return $this->templateWidget->assemble($replacements);
@@ -93,7 +93,7 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 
 		// Can we actually contain a widget?
 		if (!$this->canContain($newWidget))
-			throw new Exceptions\InvalidWidgetException('Can not put a widget of type '.get_class($newWidget).' in a widget of type '.get_class($this));
+			throw new Exceptions\InvalidWidgetException('Can not put a widget of type ' . get_class($newWidget) . ' in a widget of type ' . get_class($this));
 
 		// Insert it.
 		array_splice($this->children, $existingIndex, 0, array($newWidget));
@@ -105,7 +105,7 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	public function insertChild($widget)
 	{
 		if (!$this->canContain($widget))
-			throw new Exceptions\InvalidWidgetException('Can not put a widget of type '.get_class($widget).' in a widget of type '.get_class($this));
+			throw new Exceptions\InvalidWidgetException('Can not put a widget of type ' . get_class($widget) . ' in a widget of type ' . get_class($this));
 
 		$this->children[] = $widget;
 	}
