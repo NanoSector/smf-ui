@@ -33,7 +33,7 @@ class Autoloader
 	 * @param string $class The class name.
 	 * @return bool
 	 */
-	static public function load($class)
+	public static function load($class)
 	{
 		global $sourcedir, $settings;
 
