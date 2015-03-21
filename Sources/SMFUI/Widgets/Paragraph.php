@@ -26,11 +26,26 @@
 
 namespace SMFUI\Widgets;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+class Paragraph extends GenericWidget
 {
+	protected $text = '';
 	public function __construct($contents = '')
 	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
+		$this->setText($contents);
+	}
+
+	public function __toString()
+	{
+		return '<p>' . $this->getText() . '</p>';
+	}
+
+	public function setText($text)
+	{
+		$this->text = htmlspecialchars($text);
+	}
+
+	public function getText()
+	{
+		return $this->text;
 	}
 }

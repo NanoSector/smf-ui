@@ -31,8 +31,10 @@ class RoundframeWidget extends \SMFUI\Widgets\GenericTemplateWidget
 	public function getHTML()
 	{
 		return '
-		<span class="upperframe"><span></span></span>
-		<div class="roundframe %add_classes%" %id%>%contents%</div>
-		<span class="lowerframe"><span></span></span>';
+		<div class="%add_classes%">
+			<span class="upperframe"><span></span></span>
+			<div class="roundframe" %id%>%contents%</div>
+			<span class="lowerframe"><span></span></span>
+		</div>';
 	}
 }

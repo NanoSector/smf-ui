@@ -29,13 +29,22 @@ namespace SMFUI;
 class IconWidget extends \SMFUI\Widgets\IconTemplateWidget
 {
 	/**
-	 * The icon database.
+	 * The icon database for any non-matching icons.
 	 * @var array
 	 */
 	private $iconDb = array(
-		'collapse' => 'collapse.gif',
-		'expand' => 'expand.gif',
+		'buddy_off' => 'buddy_useroff.gif',
+		'buddy_on' => 'buddy_useron.gif',
+		'female' => 'Female.gif',
 		'help' => 'helptopics.gif',
+		'newmsg' => 'im_sm_newmsg.gif',
+		'prefs' => 'im_sm_prefs.gif',
+		'male' => 'Male.gif',
+		'msg' => 'message_sm.gif',
+		'msn' => 'msntalk.gif',
+		'delete' => 'pm_recipient_delete.gif',
+		'off' => 'useroff.gif',
+		'on' => 'useron.gif',
 	);
 
 	public function getHTML()
@@ -46,13 +55,13 @@ class IconWidget extends \SMFUI\Widgets\IconTemplateWidget
 
 	public function checkIcon($icon)
 	{
-		return array_key_exists($icon, $this->iconDb);
+		global $settings;
+		return array_key_exists($icon, $this->iconDb) || file_exists($settings['theme_dir'] . '/images/' . $icon . '.gif');
 	}
 
 	public function getIconPath($icon)
 	{
 		global $settings;
-
-		return ($settings['images_url'] . '/' . $this->iconDb[$icon]);
+		return ($settings['images_url'] . '/' . (!empty($this->iconDb[$icon]) ? $this->iconDb[$icon] : $icon . '.gif'));
 	}
 }

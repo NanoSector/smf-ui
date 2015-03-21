@@ -26,94 +26,46 @@
 
 namespace SMFUI\Widgets;
 
-abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
+class ButtonListButton extends GenericWidget
 {
-	/**
-	 * The contents of the widget.
-	 * @var string
-	 */
-	protected $contents = '';
+	protected $text = '';
+	protected $url = '';
+	public function __construct($contents = '', $url = '')
+	{
+		$this->templateWidget = new \SMFUI\ButtonListButtonWidget();
+		$this->setText($contents);
+		$this->setURL($url);
+	}
 
-	/**
-	 * Instance of the template-side widget.
-	 * @var object
-	 */
-	protected $templateWidget;
-
-	/**
-	 * ID of the widget, if available.
-	 * @var string
-	 */
-	protected $id = '';
-
-	/**
-	 * Widgets to insert.
-	 * @var array
-	 */
-	protected $children = array();
-
-	/**
-	 * Custom classes.
-	 * @var string[]
-	 */
-	protected $classes = array();
-
-	/**
-	 * HTML parameters.
-	 * @var array
-	 */
-	protected $params = array();
-
-	/**
-	 * Replacements for the HTML code.
-	 * @var array
-	 */
-	protected $replacements = array();
-
-	/**
-	 * Set up some items of the class.
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
 	public function __toString()
 	{
+		
 		$replacements = array(
 			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
 			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
+			'%text%' => $this->getText(),
+			'%url%' => $this->getURL(),
 		);
 		return $this->templateWidget->assemble($replacements);
 	}
 
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function setID($id)
+	public function setText($text)
 	{
-		$this->id = $id;
+		$this->text = htmlspecialchars($text);
 	}
 
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function getID()
+	public function getText()
 	{
-		return $this->id;
+		return $this->text;
 	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function setAdditionalClasses($classes)
+	
+	public function setURL($url)
 	{
-		$this->classes = explode(' ', $classes);
+		$this->url = $url;
 	}
-
-	/**
-	 * @see \SMFUI\Interfaces\IGenericWidget
-	 */
-	public function getAdditionalClasses()
+	
+	public function getURL()
 	{
-		return $this->classes;
+		return $this->url;
 	}
 }

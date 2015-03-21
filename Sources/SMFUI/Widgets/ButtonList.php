@@ -26,11 +26,13 @@
 
 namespace SMFUI\Widgets;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+class ButtonList extends RestrictedWidget
 {
-	public function __construct($contents = '')
+	// We only allow ButtonListButtons in here.
+	protected $allowedChildWidgets = array('SMFUI\Widgets\ButtonListButton');
+
+	public function construct($contents = '')
 	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
+		$this->templateWidget = new \SMFUI\ButtonListWidget();
 	}
 }

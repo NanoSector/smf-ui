@@ -26,6 +26,14 @@
 
 namespace SMFUI;
 
-class SampleClass {
-	#code
+class ButtonListWidget extends \SMFUI\Widgets\GenericTemplateWidget
+{
+	public function getHTML()
+	{
+		return '
+		<div class="buttonlist %add_classes%" %id%>
+			<ul>%contents%</ul>
+		</div>
+		<br class="clear" />';
+	}
 }

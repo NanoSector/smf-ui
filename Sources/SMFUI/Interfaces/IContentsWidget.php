@@ -42,16 +42,27 @@ interface IContentsWidget extends IGenericWidget
 	public function getContents();
 
 	/**
+	 * Checks whether the widget can be contained.
+	 * @param object $widget
+	 * @return bool
+	 */
+	public function canContain($widget);
+
+	/**
 	 * Adds a child widget, before the other widget.
 	 * @param object $newWidget The widget to insert.
 	 * @param object $existingWidget The existing widget to insert before.
-	 * @return boolean
+	 * @throws \SMFUI\Exceptions\InvalidWidgetException if the widget cannot be inserted
+	 * 	into the current widget.
+	 * @return void
 	 */
 	public function insertChildBefore($newWidget, $existingWidget);
 
 	/**
 	 * Adds a child widget at the end of the child list.
 	 * @param object $widget The widget to insert.
+	 * @throws \SMFUI\Exceptions\InvalidWidgetException if the widget cannot be inserted
+	 * 	into the current widget.
 	 * @return void
 	 */
 	public function insertChild($widget);

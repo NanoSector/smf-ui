@@ -24,13 +24,17 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+class WindowBgWidget extends \SMFUI\Widgets\GenericTemplateWidget
 {
-	public function __construct($contents = '')
+	public function getHTML()
 	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
+		return '
+		<div class="windowbg2 %add_classes%" %id%>
+			<span class="topslice"><span></span></span>
+			<div class="content">%contents%</div>
+			<span class="botslice"><span></span></span>
+		</div>';
 	}
 }

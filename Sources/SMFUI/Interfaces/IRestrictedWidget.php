@@ -24,13 +24,12 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI\Interfaces;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+interface IRestrictedWidget extends IContentsWidget
 {
-	public function __construct($contents = '')
-	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
-	}
+	/**
+	 * RestrictedWidgets have a different construction method.
+	 */
+	public function construct($contents);
 }

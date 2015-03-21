@@ -26,6 +26,9 @@
 
 namespace SMFUI\Widgets;
 
+use \SMFUI\Exceptions;
+use \SMFUI\Interfaces;
+
 abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces\IContentsWidget
 {
 	/**
@@ -73,15 +76,27 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	/**
 	 * @see \SMFUI\Interfaces\IContentsWidget
 	 */
+	public function canContain($widget)
+	{
+		// We can't put a block widget into a non-block widget.
+		return !($widget instanceof Interfaces\IBlock && !($this instanceof Interfaces\IBlock));
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IContentsWidget
+	 */
 	public function insertChildBefore($newWidget, $existingWidget)
 	{
 		// Try to find the existing widget.
 		if (($existingIndex = $this->searchChild($existingWidget)) === false || !is_object($newWidget))
-			return false;
+			throw new Exceptions\InvalidWidgetException('The widget you are searching for does not exist or the widget you are inserting is not a valid object.');
+
+		// Can we actually contain a widget?
+		if (!$this->canContain($newWidget))
+			throw new Exceptions\InvalidWidgetException('Can not put a widget of type ' . get_class($newWidget) . ' in a widget of type ' . get_class($this));
 
 		// Insert it.
 		array_splice($this->children, $existingIndex, 0, array($newWidget));
-		return true;
 	}
 
 	/**
@@ -89,6 +104,9 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	 */
 	public function insertChild($widget)
 	{
+		if (!$this->canContain($widget))
+			throw new Exceptions\InvalidWidgetException('Can not put a widget of type ' . get_class($widget) . ' in a widget of type ' . get_class($this));
+
 		$this->children[] = $widget;
 	}
 
@@ -123,6 +141,10 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	{
 		// Start off empty.
 		$this->contents = '';
+
+		// No children? Bummer.
+		if (empty($this->children))
+			return;
 
 		foreach ($this->children as $widget)
 			$this->contents .= $widget->__toString();

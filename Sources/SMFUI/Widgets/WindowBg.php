@@ -26,11 +26,11 @@
 
 namespace SMFUI\Widgets;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+class WindowBg extends ContentsWidget implements \SMFUI\Interfaces\IBlock
 {
 	public function __construct($contents = '')
 	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
+		$this->templateWidget = new \SMFUI\WindowBgWidget();
 		$this->setContents($contents);
 	}
 }

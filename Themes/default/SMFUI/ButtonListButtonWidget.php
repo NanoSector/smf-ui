@@ -24,13 +24,15 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+class ButtonListButtonWidget extends \SMFUI\Widgets\GenericTemplateWidget
 {
-	public function __construct($contents = '')
+	public function getHTML()
 	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
+		return '
+		<li %id%>
+			<a class="%add_classes%" href="%url%"><span>%text%</span></a>
+		</li>';
 	}
 }

@@ -24,13 +24,8 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI\Exceptions;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+class InvalidRestrictionsException extends \RuntimeException
 {
-	public function __construct($contents = '')
-	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
-	}
 }

@@ -34,4 +34,12 @@ class Base
 		if (!defined('SMF'))
 			die('You need to use SMFUI *inside* an SMF environment!');
 	}
+
+	public static function init()
+	{
+		global $sourcedir;
+
+		require_once($sourcedir . '/SMFUI/autoload.php');
+		spl_autoload_register('SMFUI\Autoloader::load');
+	}
 }

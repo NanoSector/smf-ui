@@ -19,6 +19,13 @@ A single Widget is made out of two parts:
 // Simplify things a bit. All widgets mentioned in this sample page (Catbar, Titlebar, Roundframe, Icon) reside inside the SMFUI\Widgets namespace.
 use SMFUI\Widgets;
 
+// Include all files we need... (Don't need SSI in real SMF!!)
+require_once("SSI.php");
+require_once("Sources/SMFUI/Base.php");
+SMFUI\Base::init();
+
+template_header();
+
 /*
  * Simple widgets.
  */
@@ -79,6 +86,8 @@ $icon->setAlt('This alternative text will be displayed when the icon is not avai
 
 // We can also get the Alt attribute we just set again.
 $alt = $icon->getAlt();
+
+template_footer();
 ```
 Result:
 ![Sample output](https://raw.githubusercontent.com/Yoshi2889/smf-ui/master/sample_result.png)

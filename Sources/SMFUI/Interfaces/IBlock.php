@@ -24,13 +24,8 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI\Interfaces;
 
-class Roundframe extends ContentsWidget implements \SMFUI\Interfaces\IBlock
+interface IBlock
 {
-	public function __construct($contents = '')
-	{
-		$this->templateWidget = new \SMFUI\RoundframeWidget();
-		$this->setContents($contents);
-	}
 }
