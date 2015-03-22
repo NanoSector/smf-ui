@@ -24,17 +24,9 @@
 	SOFTWARE.
 */
 
-namespace SMFUI;
+namespace SMFUI\Widgets;
 
-class WindowBgWidget extends \SMFUI\Widgets\GenericTemplateWidget
+class WindowBg2 extends WindowBg
 {
-	public function getHTML()
-	{
-		return '
-		<div class="windowbg%type% %add_classes%" %id%>
-			<span class="topslice"><span></span></span>
-			<div class="content">%contents%</div>
-			<span class="botslice"><span></span></span>
-		</div>';
-	}
+	protected $type = '2';
 }

@@ -28,9 +28,25 @@ namespace SMFUI\Widgets;
 
 class WindowBg extends ContentsWidget implements \SMFUI\Interfaces\IBlock
 {
+	protected $type = '';
 	public function __construct($contents = '')
 	{
 		$this->templateWidget = new \SMFUI\WindowBgWidget();
 		$this->setContents($contents);
+	}
+
+	/**
+	 * @see \SMFUI\Interfaces\IGenericWidget
+	 */
+	public function __toString()
+	{
+		$this->assembleChildren();
+		$replacements = array(
+			'%contents%' => $this->getContents(),
+			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
+			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
+			'%type%' => $this->type,
+		);
+		return $this->templateWidget->assemble($replacements);
 	}
 }
