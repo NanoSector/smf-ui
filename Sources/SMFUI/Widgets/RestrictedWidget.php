@@ -48,7 +48,7 @@ abstract class RestrictedWidget extends ContentsWidget implements \SMFUI\Interfa
 	public function __construct()
 	{
 		if (empty($this->allowedChildWidgets) && empty($this->deniedChildWidgets))
-		    throw new Exceptions\InvalidRestrictionsException();
+			throw new Exceptions\InvalidRestrictionsException();
 
 		$this->construct();
 	}
