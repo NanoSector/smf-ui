@@ -40,13 +40,8 @@ class WindowBg extends ContentsWidget implements \SMFUI\Interfaces\IBlock
 	 */
 	public function __toString()
 	{
-		$this->assembleChildren();
-		$replacements = array(
-			'%contents%' => $this->getContents(),
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
-			'%type%' => $this->type,
-		);
-		return $this->templateWidget->assemble($replacements);
+		$this->replacements = new \SMFUI\Replacements;
+		$this->replacements->updateReplacement('%type%', $this->type);
+		return parent::__toString();
 	}
 }

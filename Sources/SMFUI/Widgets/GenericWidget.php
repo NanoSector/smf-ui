@@ -65,24 +65,23 @@ abstract class GenericWidget implements \SMFUI\Interfaces\IGenericWidget
 	protected $params = array();
 
 	/**
-	 * Replacements for the HTML code.
-	 * @var array
+	 * Replacements class.
+	 * @var \SMFUI\Replacements
 	 */
-	protected $replacements = array();
-
-	/**
-	 * Set up some items of the class.
+	protected $replacements;
 
 	/**
 	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function __toString()
 	{
-		$replacements = array(
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
-		);
-		return $this->templateWidget->assemble($replacements);
+		if (!($this->replacements instanceof \SMFUI\Replacements))
+				$this->replacements = new \SMFUI\Replacements;
+
+		$this->replacements->updateReplacement('%id%', !empty($this->id) ? 'id="' . $this->getID() . '"' : '');
+		$this->replacements->updateReplacement('%add_classes%', implode(' ', $this->getAdditionalClasses()));
+
+		return $this->replacements->doReplacements($this->templateWidget->getHTML());
 	}
 
 	/**

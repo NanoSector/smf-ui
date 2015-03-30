@@ -44,17 +44,26 @@ abstract class ContentsWidget extends GenericWidget implements \SMFUI\Interfaces
 	protected $children;
 
 	/**
+	 * Replacements class.
+	 * @var \SMFUI\Replacements
+	 */
+	protected $replacements;
+
+	/**
 	 * @see \SMFUI\Interfaces\IGenericWidget
 	 */
 	public function __toString()
 	{
 		$this->assembleChildren();
-		$replacements = array(
-			'%contents%' => $this->getContents(),
-			'%id%' => !empty($this->id) ? 'id="' . $this->getID() . '"' : '',
-			'%add_classes%' => implode(' ', $this->getAdditionalClasses()),
-		);
-		return $this->templateWidget->assemble($replacements);
+
+		if (!($this->replacements instanceof \SMFUI\Replacements))
+				$this->replacements = new \SMFUI\Replacements;
+
+		$this->replacements->updateReplacement('%contents%', $this->getContents());
+		$this->replacements->updateReplacement('%id%', !empty($this->id) ? 'id="' . $this->getID() . '"' : '');
+		$this->replacements->updateReplacement('%add_classes%', implode(' ', $this->getAdditionalClasses()));
+
+		return $this->replacements->doReplacements($this->templateWidget->getHTML());
 	}
 
 	/**

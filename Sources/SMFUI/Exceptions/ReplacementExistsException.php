@@ -24,44 +24,8 @@
 	SOFTWARE.
 */
 
-namespace SMFUI\Widgets;
+namespace SMFUI\Exceptions;
 
-class ButtonListButton extends GenericWidget
+class ReplacementExistsException extends \RuntimeException
 {
-	protected $text = '';
-	protected $url = '';
-	public function __construct($contents = '', $url = '')
-	{
-		$this->templateWidget = new \SMFUI\ButtonListButtonWidget();
-		$this->setText($contents);
-		$this->setURL($url);
-	}
-
-	public function __toString()
-	{
-		$this->replacements = new \SMFUI\Replacements;
-		$this->replacements->updateReplacement('%text%', $this->getText());
-		$this->replacements->updateReplacement('%url%', $this->getURL());
-		return parent::__toString();
-	}
-
-	public function setText($text)
-	{
-		$this->text = htmlspecialchars($text);
-	}
-
-	public function getText()
-	{
-		return $this->text;
-	}
-
-	public function setURL($url)
-	{
-		$this->url = $url;
-	}
-
-	public function getURL()
-	{
-		return $this->url;
-	}
 }
