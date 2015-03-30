@@ -80,7 +80,6 @@ class Replacements
 		 */
 		public function doReplacements($subject)
 		{
-				//echo 'Doing ' . count($this->replacements) . ' replacements...<br />';
 				return str_replace(array_keys($this->replacements), array_values($this->replacements), $subject);
 		}
 }
