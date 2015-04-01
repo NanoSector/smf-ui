@@ -65,13 +65,37 @@ abstract class RestrictedWidget extends ContentsWidget implements \SMFUI\Interfa
 	public function canContain($widget)
 	{
 		// Is it in the array of allowed children?
-		if (!empty($this->allowedChildWidgets) && !in_array(get_class($widget), $this->allowedChildWidgets))
-			return false;
-
-		// Or is it in the array of denied children?
-		if (!empty($this->deniedChildWidgets) && in_array(get_class($widget), $this->deniedChildWidgets))
+		if ($this->isWidgetBlacklisted($widget) || !$this->isWidgetWhitelisted($widget))
 			return false;
 
 		return parent::canContain($widget);
+	}
+	
+	/**
+	 * Checks if the widget is blacklisted.
+	 * @param object $widget The widget to check.
+	 * @return boolean
+	 */
+	public function isWidgetBlacklisted($widget)
+	{
+		// No blacklist, then we're done.
+		if (empty($this->deniedChildWidgets))
+			return false;
+		
+		return in_array(get_class($widget), $this->deniedChildWidgets);
+	}
+	
+	/**
+	 * Checks if the widget is whitelisted.
+	 * @param object $widget The widget to check.
+	 * @return boolean
+	 */
+	public function isWidgetWhitelisted($widget)
+	{
+		// No whitelist, then we're done.
+		if (empty($this->allowedChildWidgets))
+			return true;
+		
+		return in_array(get_class($widget), $this->allowedChildWidgets);
 	}
 }
