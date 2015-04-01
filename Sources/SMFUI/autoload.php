@@ -71,7 +71,8 @@ class Autoloader
 	 */
 	public static function getClassName($class)
 	{
-		return end(explode('\\', $class));
+		$pieces = explode('\\', $class);
+		return end($pieces);
 	}
 	
 	/**
