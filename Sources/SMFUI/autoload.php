@@ -37,20 +37,50 @@ class Autoloader
 	{
 		global $sourcedir, $settings;
 
-		// Split $class to the "path" and "classname" parts
+		// Get the class name and path.
+		$name = this::getClassName($class);
+		$path = this::getClassPath($class);
+
+		$paths = array(
+			$sourcedir . '/' . $path . $name,
+			$settings['actual_theme_dir'] . '/' . $path . $name,
+		);
+		
+		return this::tryLoadFiles($paths);
+	}
+	
+	/**
+	 * Get the class path.
+	 * @param string $class
+	 * @return string
+	 */
+	public static function getClassPath($class)
+	{
 		$class = explode('\\', $class);
 		$classpath = $class;
 		array_pop($classpath);
-		$classname = end($class) . '.php';
 
 		// Assemble path
-		$classpath = implode('/', $classpath) . '/';
-
-		$paths = array(
-			$sourcedir . '/' . $classpath . $classname,
-			$settings['actual_theme_dir'] . '/' . $classpath . $classname,
-		);
-
+		return implode('/', $classpath) . '/';
+	}
+	
+	/**
+	 * Get the class name.
+	 * @param stirng $class
+	 * @return string
+	 */
+	public static function getClassName($class)
+	{
+		return end(explode('\\', $class));
+	}
+	
+	/**
+	 * Try and load files.
+	 * @param array $paths The paths to the files to try.
+	 * @return boolean True on success, false on failure.
+	 */
+	public static function tryLoadFiles($paths)
+	{
 		foreach ($paths as $path)
 		{
 			if (!file_exists($path))
